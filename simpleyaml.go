@@ -23,6 +23,7 @@ type Yaml struct {
 // ////////////////////////////////////////////////////////////////////////////////// //
 
 var (
+	ErrYAMLIsNil           = errors.New("Yaml struct or data is nil")
 	ErrMapTypeAssertion    = errors.New("Type assertion to map[string]interface{} failed")
 	ErrArrayTypeAssertion  = errors.New("Type assertion to []interface{} failed")
 	ErrBoolTypeAssertion   = errors.New("Type assertion to bool failed")
@@ -58,6 +59,10 @@ func NewYaml(body []byte) (*Yaml, error) {
 
 // Interface returns the underlying data
 func (y *Yaml) Interface() interface{} {
+	if y == nil || y.data == nil {
+		return nil
+	}
+
 	return y.data
 }
 
@@ -68,16 +73,28 @@ func (y *Yaml) Encode() ([]byte, error) {
 
 // MarshalYAML implements the yaml.Marshaler interface
 func (y *Yaml) MarshalYAML() ([]byte, error) {
+	if y == nil || y.data == nil {
+		return nil, ErrYAMLIsNil
+	}
+
 	return yaml.Marshal(&y.data)
 }
 
 // UnmarshalYAML implements the yaml.Unmarshaler interface
 func (y *Yaml) UnmarshalYAML(p []byte) error {
+	if y == nil {
+		return ErrYAMLIsNil
+	}
+
 	return yaml.Unmarshal(p, &y.data)
 }
 
 // Int type asserts to an `int`
 func (y *Yaml) Int() (int, error) {
+	if y == nil || y.data == nil {
+		return 0, ErrYAMLIsNil
+	}
+
 	i, ok := (y.data).(int)
 
 	if ok {
@@ -89,6 +106,10 @@ func (y *Yaml) Int() (int, error) {
 
 // Float type asserts to an `float64`
 func (y *Yaml) Float() (float64, error) {
+	if y == nil || y.data == nil {
+		return 0.0, ErrYAMLIsNil
+	}
+
 	f, ok := (y.data).(float64)
 
 	if ok {
@@ -100,6 +121,10 @@ func (y *Yaml) Float() (float64, error) {
 
 // Bool type asserts to an `bool`
 func (y *Yaml) Bool() (bool, error) {
+	if y == nil || y.data == nil {
+		return false, ErrYAMLIsNil
+	}
+
 	b, ok := (y.data).(bool)
 
 	if ok {
@@ -111,6 +136,10 @@ func (y *Yaml) Bool() (bool, error) {
 
 // String type asserts to an `string`
 func (y *Yaml) String() (string, error) {
+	if y == nil || y.data == nil {
+		return "", ErrYAMLIsNil
+	}
+
 	s, ok := (y.data).(string)
 
 	if ok {
@@ -122,6 +151,10 @@ func (y *Yaml) String() (string, error) {
 
 // Bytes type asserts to an `[]byte`
 func (y *Yaml) Bytes() ([]byte, error) {
+	if y == nil || y.data == nil {
+		return nil, ErrYAMLIsNil
+	}
+
 	s, ok := (y.data).(string)
 
 	if ok {
@@ -133,6 +166,10 @@ func (y *Yaml) Bytes() ([]byte, error) {
 
 // Map type asserts to an `map`
 func (y *Yaml) Map() (map[interface{}]interface{}, error) {
+	if y == nil || y.data == nil {
+		return nil, ErrYAMLIsNil
+	}
+
 	m, ok := (y.data).(map[interface{}]interface{})
 
 	if ok {
@@ -144,6 +181,10 @@ func (y *Yaml) Map() (map[interface{}]interface{}, error) {
 
 // Array type asserts to an `array`
 func (y *Yaml) Array() ([]interface{}, error) {
+	if y == nil || y.data == nil {
+		return nil, ErrYAMLIsNil
+	}
+
 	a, ok := (y.data).([]interface{})
 
 	if ok {
@@ -155,6 +196,10 @@ func (y *Yaml) Array() ([]interface{}, error) {
 
 // StringArray type asserts to an `array` of `string`
 func (y *Yaml) StringArray() ([]string, error) {
+	if y == nil || y.data == nil {
+		return nil, ErrYAMLIsNil
+	}
+
 	a, err := y.Array()
 
 	if err != nil {
@@ -169,13 +214,7 @@ func (y *Yaml) StringArray() ([]string, error) {
 			continue
 		}
 
-		s, ok := item.(string)
-
-		if !ok {
-			return nil, err
-		}
-
-		result = append(result, s)
+		result = append(result, item.(string))
 	}
 
 	return result, nil
@@ -373,8 +412,13 @@ func (y *Yaml) GetIndex(index int) *Yaml {
 	return &Yaml{nil}
 }
 
-// GetIndex returns a pointer to a new `Yaml` object
-// for `index` in its `array` representation
+// CheckGet returns a pointer to a new `Yaml` object and
+// a `bool` identifying success or failure
+//
+// useful for chained operations when success is important:
+//    if data, ok := yaml.Get("top_level").CheckGet("inner"); ok {
+//        log.Println(data)
+//    }
 func (y *Yaml) CheckGet(key string) (*Yaml, bool) {
 	m, err := y.Map()
 
@@ -413,7 +457,7 @@ func (y *Yaml) GetMapKeys() ([]string, error) {
 
 	var result []string
 
-	for key := range m {
+	for key, _ := range m {
 		skey, ok := key.(string)
 
 		if ok {

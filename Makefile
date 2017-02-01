@@ -11,7 +11,7 @@ deps-test:
 	go get -v github.com/axw/gocov/gocov
 	go get -v pkg.re/check.v1
 
-test: deps-test
+test:
 	go test -covermode=count ./...
 
 fmt:
