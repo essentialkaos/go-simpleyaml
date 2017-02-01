@@ -12,7 +12,7 @@ deps-test:
 	go get -v pkg.re/check.v1
 
 test:
-	go test -covermode=count ./...
+	gocov test . | gocov report
 
 fmt:
 	find . -name "*.go" -exec gofmt -s -w {} \;
