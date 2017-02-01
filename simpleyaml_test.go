@@ -515,3 +515,8 @@ func (ys *YamlSuite) TestGetIndex(c *C) {
 	c.Assert(err, Equals, ErrYAMLIsNil)
 	c.Assert(val, Equals, "")
 }
+
+func (ys *YamlSuite) TestArraySize(c *C) {
+	c.Assert(ys.yaml.Get("categories").ArraySize(), Equals, 2)
+	c.Assert(ys.yaml.Get("admin").ArraySize(), Equals, -1)
+}

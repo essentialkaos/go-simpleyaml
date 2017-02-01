@@ -68,7 +68,7 @@ func (y *Yaml) Interface() interface{} {
 	return y.data
 }
 
-// Encode returns its marshaled data as `[]byte`
+// Encode returns it's marshaled data as `[]byte`
 func (y *Yaml) Encode() ([]byte, error) {
 	return y.MarshalYAML()
 }
@@ -369,7 +369,7 @@ func (y *Yaml) MustBool(args ...bool) bool {
 }
 
 // Get returns a pointer to a new `Yaml` object
-// for `key` in its `map` representation
+// for `key` in it's `map` representation
 func (y *Yaml) Get(key string) *Yaml {
 	m, err := y.Map()
 
@@ -399,7 +399,7 @@ func (y *Yaml) GetPath(branch ...string) *Yaml {
 }
 
 // GetIndex returns a pointer to a new `Yaml` object
-// for `index` in its `array` representation
+// for `index` in it's `array` representation
 func (y *Yaml) GetIndex(index int) *Yaml {
 	a, err := y.Array()
 
@@ -412,6 +412,18 @@ func (y *Yaml) GetIndex(index int) *Yaml {
 	}
 
 	return &Yaml{nil}
+}
+
+// ArraySize return array size or -1 if objects
+// is not an array
+func (y *Yaml) ArraySize() int {
+	a, err := y.Array()
+
+	if err != nil {
+		return -1
+	}
+
+	return len(a)
 }
 
 // CheckGet returns a pointer to a new `Yaml` object and
@@ -459,7 +471,7 @@ func (y *Yaml) GetMapKeys() ([]string, error) {
 
 	var result []string
 
-	for key := range m {
+	for key, _ := range m {
 		skey, ok := key.(string)
 
 		if ok {
