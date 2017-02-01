@@ -2,6 +2,6 @@
   "GOLANG": {
     "TOO_MANY_IVARS": [12, 16, 20, 24],
     "TOO_MANY_FUNCTIONS": [30, 45, 60, 90],
-    "TOTAL_LOC": [500, 750, 1000, 2000],
+    "TOTAL_LOC": [500, 750, 1000, 2000]
   }
 }
