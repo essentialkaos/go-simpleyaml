@@ -16,12 +16,14 @@ import (
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 
+// Yaml is YAML struct
 type Yaml struct {
 	data interface{}
 }
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 
+// Errors
 var (
 	ErrYAMLIsNil           = errors.New("Yaml struct or data is nil")
 	ErrMapTypeAssertion    = errors.New("Type assertion to map[string]interface{} failed")
