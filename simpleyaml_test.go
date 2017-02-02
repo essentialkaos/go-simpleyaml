@@ -520,3 +520,14 @@ func (ys *YamlSuite) TestArraySize(c *C) {
 	c.Assert(ys.yaml.Get("categories").ArraySize(), Equals, 2)
 	c.Assert(ys.yaml.Get("admin").ArraySize(), Equals, -1)
 }
+
+func (ys *YamlSuite) TestExistChecks(c *C) {
+	c.Assert(ys.yaml.IsExist("admin"), Equals, true)
+	c.Assert(ys.yaml.IsExist("unknown"), Equals, false)
+
+	c.Assert(ys.yaml.IsPathExist("test1", "test2", "test4"), Equals, true)
+	c.Assert(ys.yaml.IsPathExist("test1", "test20", "test4"), Equals, false)
+
+	c.Assert(ys.yaml.Get("categories").IsIndexExist(1), Equals, true)
+	c.Assert(ys.yaml.Get("categories").IsIndexExist(99), Equals, false)
+}

@@ -461,6 +461,24 @@ func (y *Yaml) IsMap() bool {
 	return err == nil
 }
 
+// IsExist return false if object with given key
+// is not present in `Yaml` object
+func (y *Yaml) IsExist(key string) bool {
+	return y.Get(key).data != nil
+}
+
+// IsPathExist return false if object with given path
+// is not present in `Yaml` object
+func (y *Yaml) IsPathExist(path ...string) bool {
+	return y.GetPath(path...).data != nil
+}
+
+// IsIndexExist return false if object with given index
+// is not present in `Yaml` array
+func (y *Yaml) IsIndexExist(index int) bool {
+	return y.GetIndex(index).data != nil
+}
+
 // GetMapKeys return slice with all map keys
 func (y *Yaml) GetMapKeys() ([]string, error) {
 	m, err := y.Map()
