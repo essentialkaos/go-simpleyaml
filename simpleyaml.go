@@ -489,7 +489,7 @@ func (y *Yaml) GetMapKeys() ([]string, error) {
 
 	var result []string
 
-	for key, _ := range m {
+	for key := range m {
 		skey, ok := key.(string)
 
 		if ok {
