@@ -341,7 +341,7 @@ func (ys *YamlSuite) TestStringArray(c *C) {
 	val, err = ys.yaml.Get("array2").StringArray()
 
 	c.Assert(err, NotNil)
-	c.Assert(err, Equals, ErrArrayTypeAssertion)
+	c.Assert(err, Equals, ErrStringArrayTypeAssertion)
 	c.Assert(val, IsNil)
 }
 
