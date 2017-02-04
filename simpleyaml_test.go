@@ -37,6 +37,11 @@ array1:
    - test1
    -
    - test3
+array2:
+  - file: test1
+    size: 100
+  - file: test2
+    size: 200
 `
 
 // ////////////////////////////////////////////////////////////////////////////////// //
@@ -332,6 +337,12 @@ func (ys *YamlSuite) TestStringArray(c *C) {
 	c.Assert(err, NotNil)
 	c.Assert(err, Equals, ErrArrayTypeAssertion)
 	c.Assert(val, IsNil)
+
+	val, err = ys.yaml.Get("array2").StringArray()
+
+	c.Assert(err, NotNil)
+	c.Assert(err, Equals, ErrArrayTypeAssertion)
+	c.Assert(val, IsNil)
 }
 
 func (ys *YamlSuite) TestIsArray(c *C) {
@@ -356,7 +367,7 @@ func (ys *YamlSuite) TestMap(c *C) {
 	keys, err := ys.yaml.GetMapKeys()
 
 	c.Assert(err, IsNil)
-	c.Assert(keys, HasLen, 8)
+	c.Assert(keys, HasLen, 9)
 
 	keys, err = ys.yaml.Get("admin").GetMapKeys()
 

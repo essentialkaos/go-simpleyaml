@@ -25,4 +25,4 @@ before_install:
   - make deps-test
 
 script:
-  - make test
+  - make coveralls COVERALLS_TOKEN=$COVERALLS_TOKEN

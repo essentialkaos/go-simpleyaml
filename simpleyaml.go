@@ -25,14 +25,15 @@ type Yaml struct {
 
 // Errors
 var (
-	ErrYAMLIsNil           = errors.New("Yaml struct or data is nil")
-	ErrMapTypeAssertion    = errors.New("Type assertion to map[string]interface{} failed")
-	ErrArrayTypeAssertion  = errors.New("Type assertion to []interface{} failed")
-	ErrBoolTypeAssertion   = errors.New("Type assertion to bool failed")
-	ErrStringTypeAssertion = errors.New("Type assertion to string failed")
-	ErrByteTypeAssertion   = errors.New("Type assertion to []byte failed")
-	ErrIntTypeAssertion    = errors.New("Type assertion to int failed")
-	ErrFloatTypeAssertion  = errors.New("Type assertion to float64 failed")
+	ErrYAMLIsNil                = errors.New("Yaml struct or data is nil")
+	ErrMapTypeAssertion         = errors.New("Type assertion to map[string]interface{} failed")
+	ErrArrayTypeAssertion       = errors.New("Type assertion to []interface{} failed")
+	ErrStringArrayTypeAssertion = errors.New("Type assertion to []string failed")
+	ErrBoolTypeAssertion        = errors.New("Type assertion to bool failed")
+	ErrStringTypeAssertion      = errors.New("Type assertion to string failed")
+	ErrByteTypeAssertion        = errors.New("Type assertion to []byte failed")
+	ErrIntTypeAssertion         = errors.New("Type assertion to int failed")
+	ErrFloatTypeAssertion       = errors.New("Type assertion to float64 failed")
 )
 
 // ////////////////////////////////////////////////////////////////////////////////// //
@@ -216,7 +217,13 @@ func (y *Yaml) StringArray() ([]string, error) {
 			continue
 		}
 
-		result = append(result, item.(string))
+		str, ok := item.(string)
+
+		if !ok {
+			return nil, ErrStringArrayTypeAssertion
+		}
+
+		result = append(result, str)
 	}
 
 	return result, nil
