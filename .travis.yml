@@ -25,4 +25,6 @@ before_install:
   - make deps-test
 
 script:
-  - make test
+  - go get -v github.com/mattn/goveralls
+  - go test -covermode count -coverprofile cover.out
+  - goveralls -service travis-ci -repotoken $COVERALLS_TOKEN -coverprofile cover.out
