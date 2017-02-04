@@ -20,8 +20,3 @@ test:
 
 fmt:
 	find . -name "*.go" -exec gofmt -s -w {} \;
-
-coveralls:
-	go get -v github.com/mattn/goveralls
-	go test -covermode count -coverprofile cover.out
-	goveralls -service travis-ci -repotoken $(COVERALLS_TOKEN) -coverprofile cover.out
