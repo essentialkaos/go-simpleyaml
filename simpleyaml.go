@@ -209,24 +209,7 @@ func (y *Yaml) StringArray() ([]string, error) {
 		return nil, err
 	}
 
-	result := make([]string, 0, len(a))
-
-	for _, item := range a {
-		if item == nil {
-			result = append(result, "")
-			continue
-		}
-
-		str, ok := item.(string)
-
-		if !ok {
-			return nil, ErrStringArrayTypeAssertion
-		}
-
-		result = append(result, str)
-	}
-
-	return result, nil
+	return convertSlice(a)
 }
 
 // MustArray guarantees the return of a `[]interface{}` (with optional default)
@@ -502,6 +485,30 @@ func (y *Yaml) GetMapKeys() ([]string, error) {
 		if ok {
 			result = append(result, skey)
 		}
+	}
+
+	return result, nil
+}
+
+// ////////////////////////////////////////////////////////////////////////////////// //
+
+// convertSlice convert []interface{} slice to string slice
+func convertSlice(a []interface{}) ([]string, error) {
+	result := make([]string, 0, len(a))
+
+	for _, item := range a {
+		if item == nil {
+			result = append(result, "")
+			continue
+		}
+
+		str, ok := item.(string)
+
+		if !ok {
+			return nil, ErrStringArrayTypeAssertion
+		}
+
+		result = append(result, str)
 	}
 
 	return result, nil
