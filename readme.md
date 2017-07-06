@@ -25,10 +25,12 @@ go get -u pkg.re/essentialkaos/go-simpleyaml.v1
 ### Build Status
 
 | Branch | Status |
-|------------|--------|
+|--------|--------|
 | `master` | [![Build Status](https://travis-ci.org/essentialkaos/go-simpleyaml.svg?branch=master)](https://travis-ci.org/essentialkaos/go-simpleyaml) |
 | `develop` | [![Build Status](https://travis-ci.org/essentialkaos/go-simpleyaml.svg?branch=develop)](https://travis-ci.org/essentialkaos/go-simpleyaml) |
 
 ### License
 
 [EKOL](https://essentialkaos.com/ekol)
+
+<p align="center"><a href="https://essentialkaos.com"><img src="https://gh.kaos.io/ekgh.svg"/></a></p>
