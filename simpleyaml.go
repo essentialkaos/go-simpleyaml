@@ -388,9 +388,9 @@ func (y *Yaml) GetPath(branch ...string) *Yaml {
 	return yin
 }
 
-// GetIndex returns a pointer to a new `Yaml` object
+// GetByIndex returns a pointer to a new `Yaml` object
 // for `index` in it's `array` representation
-func (y *Yaml) GetIndex(index int) *Yaml {
+func (y *Yaml) GetByIndex(index int) *Yaml {
 	a, err := y.Array()
 
 	if err != nil {
@@ -402,18 +402,6 @@ func (y *Yaml) GetIndex(index int) *Yaml {
 	}
 
 	return &Yaml{nil}
-}
-
-// ArraySize return array size or -1 if objects
-// is not an array
-func (y *Yaml) ArraySize() int {
-	a, err := y.Array()
-
-	if err != nil {
-		return -1
-	}
-
-	return len(a)
 }
 
 // CheckGet returns a pointer to a new `Yaml` object and
@@ -466,7 +454,7 @@ func (y *Yaml) IsPathExist(path ...string) bool {
 // IsIndexExist return false if object with given index
 // is not present in `Yaml` array
 func (y *Yaml) IsIndexExist(index int) bool {
-	return y.GetIndex(index).data != nil
+	return y.GetByIndex(index).data != nil
 }
 
 // GetMapKeys return slice with all map keys

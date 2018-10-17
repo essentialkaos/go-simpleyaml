@@ -505,31 +505,26 @@ func (ys *YamlSuite) TestCheckGet(c *C) {
 	c.Assert(ok, Equals, false)
 }
 
-func (ys *YamlSuite) TestGetIndex(c *C) {
+func (ys *YamlSuite) TestGetByIndex(c *C) {
 	var err error
 	var val string
 
-	val, err = ys.yaml.Get("categories").GetIndex(0).String()
+	val, err = ys.yaml.Get("categories").GetByIndex(0).String()
 
 	c.Assert(err, IsNil)
 	c.Assert(val, Equals, "category1")
 
-	val, err = ys.yaml.Get("categories").GetIndex(999).String()
+	val, err = ys.yaml.Get("categories").GetByIndex(999).String()
 
 	c.Assert(err, NotNil)
 	c.Assert(err, Equals, ErrYAMLIsNil)
 	c.Assert(val, Equals, "")
 
-	val, err = ys.yaml.Get("admin").GetIndex(0).String()
+	val, err = ys.yaml.Get("admin").GetByIndex(0).String()
 
 	c.Assert(err, NotNil)
 	c.Assert(err, Equals, ErrYAMLIsNil)
 	c.Assert(val, Equals, "")
-}
-
-func (ys *YamlSuite) TestArraySize(c *C) {
-	c.Assert(ys.yaml.Get("categories").ArraySize(), Equals, 2)
-	c.Assert(ys.yaml.Get("admin").ArraySize(), Equals, -1)
 }
 
 func (ys *YamlSuite) TestExistChecks(c *C) {

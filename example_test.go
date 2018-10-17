@@ -345,30 +345,17 @@ test1:
 	// John Doe
 }
 
-func ExampleYaml_GetIndex() {
+func ExampleYaml_GetByIndex() {
 	data := `abcd:
   - John
   - Bob`
 
 	yml, _ := NewYaml([]byte(data))
 
-	fmt.Println(yml.Get("abcd").GetIndex(1).MustString(""))
+	fmt.Println(yml.Get("abcd").GetByIndex(1).MustString(""))
 
 	// Output:
 	// Bob
-}
-
-func ExampleYaml_ArraySize() {
-	data := `abcd:
-  - John
-  - Bob`
-
-	yml, _ := NewYaml([]byte(data))
-
-	fmt.Println(yml.Get("abcd").ArraySize())
-
-	// Output:
-	// 2
 }
 
 func ExampleYaml_IsExist() {
