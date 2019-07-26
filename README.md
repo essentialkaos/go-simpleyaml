@@ -1,7 +1,5 @@
 <p align="center"><a href="#readme"><img src="https://gh.kaos.st/go-simpleyaml.svg"/></a></p>
 
-<p align="center"><a href="#installation">Installation</a> • <a href="#build-status">Build Status</a> • <a href="#license">License</a></p>
-
 <p align="center">
   <a href="https://godoc.org/pkg.re/essentialkaos/go-simpleyaml.v2"><img src="https://godoc.org/pkg.re/essentialkaos/go-simpleyaml.v2?status.svg"></a>
   <a href="https://goreportcard.com/report/github.com/essentialkaos/go-simpleyaml"><img src="https://goreportcard.com/badge/github.com/essentialkaos/go-simpleyaml"></a>
@@ -9,6 +7,10 @@
   <a href='https://coveralls.io/github/essentialkaos/go-simpleyaml?branch=master'><img src='https://coveralls.io/repos/github/essentialkaos/go-simpleyaml/badge.svg?branch=master' alt='Coverage Status' /></a>
   <a href="https://essentialkaos.com/ekol"><img src="https://gh.kaos.st/ekol.svg"></a>
 </p>
+
+<p align="center"><a href="#installation">Installation</a> • <a href="#build-status">Build Status</a> • <a href="#license">License</a></p>
+
+<br/>
 
 `go-simpleyaml` is a Go package to interact with arbitrary YAML, similar as [go-simplejson](https://github.com/bitly/go-simplejson).
 
