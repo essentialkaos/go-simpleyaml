@@ -38,8 +38,8 @@ go get -u pkg.re/essentialkaos/go-simpleyaml.v2
 
 | Branch | Status |
 |--------|--------|
-| `master` | [![Build Status](https://travis-ci.org/essentialkaos/go-simpleyaml.svg?branch=master)](https://travis-ci.org/essentialkaos/go-simpleyaml) |
-| `develop` | [![Build Status](https://travis-ci.org/essentialkaos/go-simpleyaml.svg?branch=develop)](https://travis-ci.org/essentialkaos/go-simpleyaml) |
+| `master` | [![Build Status](https://travis-ci.com/essentialkaos/go-simpleyaml.svg?branch=master)](https://travis-ci.com/essentialkaos/go-simpleyaml) |
+| `develop` | [![Build Status](https://travis-ci.com/essentialkaos/go-simpleyaml.svg?branch=develop)](https://travis-ci.com/essentialkaos/go-simpleyaml) |
 
 ### License
 
