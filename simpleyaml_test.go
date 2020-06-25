@@ -150,6 +150,14 @@ func (ys *YamlSuite) TestNil(c *C) {
 	c.Assert(err, Equals, ErrYAMLIsNil)
 }
 
+func (ys *YamlSuite) TestDump(c *C) {
+	c.Assert(ys.yaml.Get("unknown").Dump(), Equals, "")
+	c.Assert(ys.yaml.Get("name").Dump(), Equals, "John Doe")
+	c.Assert(ys.yaml.Get("age").Dump(), Equals, "35")
+	c.Assert(ys.yaml.Get("balance").Dump(), Equals, "45.89")
+	c.Assert(ys.yaml.Get("admin").Dump(), Equals, "true")
+}
+
 func (ys *YamlSuite) TestBool(c *C) {
 	var err error
 	var val bool

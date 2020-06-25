@@ -107,7 +107,7 @@ func (y *Yaml) Int() (int, error) {
 	return 0, ErrIntTypeAssertion
 }
 
-// Float type asserts to an `float64`
+// Float type asserts to a `float64`
 func (y *Yaml) Float() (float64, error) {
 	if y == nil || y.data == nil {
 		return 0.0, ErrYAMLIsNil
@@ -122,7 +122,7 @@ func (y *Yaml) Float() (float64, error) {
 	return 0.0, ErrFloatTypeAssertion
 }
 
-// Bool type asserts to an `bool`
+// Bool type asserts to a `bool`
 func (y *Yaml) Bool() (bool, error) {
 	if y == nil || y.data == nil {
 		return false, ErrYAMLIsNil
@@ -137,7 +137,7 @@ func (y *Yaml) Bool() (bool, error) {
 	return false, ErrBoolTypeAssertion
 }
 
-// String type asserts to an `string`
+// String type asserts to a `string`
 func (y *Yaml) String() (string, error) {
 	if y == nil || y.data == nil {
 		return "", ErrYAMLIsNil
@@ -152,7 +152,7 @@ func (y *Yaml) String() (string, error) {
 	return "", ErrStringTypeAssertion
 }
 
-// Bytes type asserts to an `[]byte`
+// Bytes type asserts to a `[]byte`
 func (y *Yaml) Bytes() ([]byte, error) {
 	if y == nil || y.data == nil {
 		return nil, ErrYAMLIsNil
@@ -195,6 +195,15 @@ func (y *Yaml) Array() ([]interface{}, error) {
 	}
 
 	return nil, ErrArrayTypeAssertion
+}
+
+// Dump returns string representation of any kind of data
+func (y *Yaml) Dump() string {
+	if y == nil || y.data == nil {
+		return ""
+	}
+
+	return fmt.Sprintf("%v", y.data)
 }
 
 // StringArray type asserts to an `array` of `string`
