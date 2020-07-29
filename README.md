@@ -2,6 +2,7 @@
 
 <p align="center">
   <a href="https://godoc.org/pkg.re/essentialkaos/go-simpleyaml.v2"><img src="https://godoc.org/pkg.re/essentialkaos/go-simpleyaml.v2?status.svg"></a>
+  <a href="https://github.com/essentialkaos/go-simpleyaml/actions?query=workflow%3ACodeQL"><img src="https://github.com/essentialkaos/go-simpleyaml/workflows/CodeQL/badge.svg" /></a>
   <a href="https://goreportcard.com/report/github.com/essentialkaos/go-simpleyaml"><img src="https://goreportcard.com/badge/github.com/essentialkaos/go-simpleyaml"></a>
   <a href="https://codebeat.co/projects/github-com-essentialkaos-go-simpleyaml"><img alt="codebeat badge" src="https://codebeat.co/badges/ffe9f2d6-8586-45c0-90fb-cdb4e7141960" /></a>
   <a href='https://coveralls.io/github/essentialkaos/go-simpleyaml?branch=master'><img src='https://coveralls.io/repos/github/essentialkaos/go-simpleyaml/badge.svg?branch=master' alt='Coverage Status' /></a>
