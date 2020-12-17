@@ -1,7 +1,7 @@
 <p align="center"><a href="#readme"><img src="https://gh.kaos.st/go-simpleyaml.svg"/></a></p>
 
 <p align="center">
-  <a href="https://pkg.go.dev/pkg.re/essentialkaos/go-simpleyaml.v2"><img src="https://pkg.go.dev/badge/pkg.re/essentialkaos/go-simpleyaml.v2"></a>
+  <a href="https://pkg.go.dev/pkg.re/essentialkaos/go-simpleyaml.v2"><img src="https://gh.kaos.st/godoc.svg" alt="PkgGoDev"></a>
   <a href="https://github.com/essentialkaos/go-simpleyaml/actions?query=workflow%3ACodeQL"><img src="https://github.com/essentialkaos/go-simpleyaml/workflows/CodeQL/badge.svg" /></a>
   <a href="https://goreportcard.com/report/github.com/essentialkaos/go-simpleyaml"><img src="https://goreportcard.com/badge/github.com/essentialkaos/go-simpleyaml"></a>
   <a href="https://codebeat.co/projects/github-com-essentialkaos-go-simpleyaml"><img alt="codebeat badge" src="https://codebeat.co/badges/ffe9f2d6-8586-45c0-90fb-cdb4e7141960" /></a>
