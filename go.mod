@@ -1,4 +1,4 @@
-module github.com/essentialkaos/go-simpleyaml
+module github.com/essentialkaos/go-simpleyaml/v2
 
 go 1.17
 
