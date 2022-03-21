@@ -1,7 +1,7 @@
 <p align="center"><a href="#readme"><img src="https://gh.kaos.st/go-simpleyaml.svg"/></a></p>
 
 <p align="center">
-  <a href="https://kaos.sh/g/go-simpleyaml.v2"><img src="https://gh.kaos.st/godoc.svg" alt="PkgGoDev" /></a>
+  <a href="https://kaos.sh/g/go-simpleyaml"><img src="https://gh.kaos.st/godoc.svg" alt="PkgGoDev" /></a>
   <a href="https://kaos.sh/w/go-simpleyaml/codeql"><img src="https://kaos.sh/w/go-simpleyaml/codeql.svg" alt="GitHub Actions CodeQL Status" /></a>
   <a href="https://kaos.sh/r/go-simpleyaml"><img src="https://kaos.sh/r/go-simpleyaml.svg" alt="GoReportCard" /></a>
   <a href="https://codebeat.co/projects/github-com-essentialkaos-go-simpleyaml"><img alt="codebeat badge" src="https://codebeat.co/badges/ffe9f2d6-8586-45c0-90fb-cdb4e7141960" /></a>
