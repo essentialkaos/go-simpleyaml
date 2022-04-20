@@ -3,7 +3,7 @@ module github.com/essentialkaos/go-simpleyaml/v2
 go 1.17
 
 require (
-	github.com/essentialkaos/check v1.2.1
+	github.com/essentialkaos/check v1.3.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 
