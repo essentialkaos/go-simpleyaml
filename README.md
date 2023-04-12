@@ -17,16 +17,10 @@
 
 ### Installation
 
-Make sure you have a working Go 1.16+ workspace ([instructions](https://golang.org/doc/install)), then:
+Make sure you have a working Go 1.18+ workspace ([instructions](https://golang.org/doc/install)), then:
 
-```
-go get -d github.com/essentialkaos/go-simpleyaml/v2
-```
-
-For update to latest stable release, do:
-
-```
-go get -d -u github.com/essentialkaos/go-simpleyaml/v2
+```bash
+go get -u github.com/essentialkaos/go-simpleyaml/v2
 ```
 
 ### Build Status
