@@ -17,7 +17,7 @@
 
 ### Installation
 
-Make sure you have a working Go 1.18+ workspace ([instructions](https://golang.org/doc/install)), then:
+Make sure you have a working Go 1.18+ workspace ([instructions](https://go.dev/doc/install)), then:
 
 ```bash
 go get -u github.com/essentialkaos/go-simpleyaml/v2
