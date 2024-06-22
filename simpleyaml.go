@@ -45,7 +45,7 @@ func New() *Yaml {
 	}
 }
 
-// NewYaml returns a pointer to a new `Yaml` object after unmarshaling `body` bytes
+// NewYaml returns a pointer to a new `Yaml` object after unmarshalling `body` bytes
 func NewYaml(body []byte) (*Yaml, error) {
 	var data interface{}
 
@@ -223,7 +223,7 @@ func (y *Yaml) StringArray() ([]string, error) {
 
 // MustArray guarantees the return of a `[]interface{}` (with optional default)
 //
-// useful when you want to interate over array values in a succinct manner:
+// useful when you want to iterate over array values in a succinct manner:
 //		for i, v := range yaml.Get("results").MustArray() {
 //			fmt.Println(i, v)
 //
@@ -245,7 +245,7 @@ func (y *Yaml) MustArray(args ...[]interface{}) []interface{} {
 
 // MustMap guarantees the return of a `map[string]interface{}` (with optional default)
 //
-// useful when you want to interate over map values in a succinct manner:
+// useful when you want to iterate over map values in a succinct manner:
 //		for k, v := range yaml.Get("dictionary").MustMap() {
 //			fmt.Println(k, v)
 //		}
@@ -287,7 +287,7 @@ func (y *Yaml) MustString(args ...string) string {
 
 // MustStringArray guarantees the return of a `[]string` (with optional default)
 //
-// useful when you want to interate over array values in a succinct manner:
+// useful when you want to iterate over array values in a succinct manner:
 //		for i, s := range yaml.Get("results").MustStringArray() {
 //			fmt.Println(i, s)
 //		}
