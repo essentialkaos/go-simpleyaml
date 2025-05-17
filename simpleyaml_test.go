@@ -2,7 +2,7 @@ package simpleyaml
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 //                                                                                    //
-//                         Copyright (c) 2023 ESSENTIAL KAOS                          //
+//                         Copyright (c) 2025 ESSENTIAL KAOS                          //
 //      Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>     //
 //                                                                                    //
 // ////////////////////////////////////////////////////////////////////////////////// //
@@ -310,11 +310,11 @@ func (ys *YamlSuite) TestBytes(c *C) {
 
 func (ys *YamlSuite) TestArray(c *C) {
 	var err error
-	var val []interface{}
+	var val []any
 
 	val, err = ys.yaml.Get("categories").Array()
 
-	c.Assert(val, DeepEquals, []interface{}{"category1", "category2"})
+	c.Assert(val, DeepEquals, []any{"category1", "category2"})
 	c.Assert(err, IsNil)
 }
 
@@ -385,12 +385,12 @@ func (ys *YamlSuite) TestMap(c *C) {
 }
 
 func (ys *YamlSuite) TestMustArray(c *C) {
-	var def = []interface{}{"test1", "test2"}
+	var def = []any{"test1", "test2"}
 
 	val := ys.yaml.Get("categories").MustArray(def)
 
 	c.Assert(val, NotNil)
-	c.Assert(val, DeepEquals, []interface{}{"category1", "category2"})
+	c.Assert(val, DeepEquals, []any{"category1", "category2"})
 
 	val = ys.yaml.Get("admin").MustArray(def)
 
@@ -399,12 +399,12 @@ func (ys *YamlSuite) TestMustArray(c *C) {
 }
 
 func (ys *YamlSuite) TestMustMap(c *C) {
-	var def = map[interface{}]interface{}{"test": "test1"}
+	var def = map[any]any{"test": "test1"}
 
 	val := ys.yaml.Get("meta").MustMap(def)
 
 	c.Assert(val, NotNil)
-	c.Assert(val, DeepEquals, map[interface{}]interface{}{"uid": 120, "gid": 350})
+	c.Assert(val, DeepEquals, map[any]any{"uid": 120, "gid": 350})
 
 	val = ys.yaml.Get("admin").MustMap(def)
 

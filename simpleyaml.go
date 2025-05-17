@@ -2,7 +2,7 @@ package simpleyaml
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 //                                                                                    //
-//                         Copyright (c) 2023 ESSENTIAL KAOS                          //
+//                         Copyright (c) 2025 ESSENTIAL KAOS                          //
 //      Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>     //
 //                                                                                    //
 // ////////////////////////////////////////////////////////////////////////////////// //
@@ -11,14 +11,14 @@ import (
 	"errors"
 	"fmt"
 
-	"gopkg.in/yaml.v2"
+	"github.com/essentialkaos/yaml/v2"
 )
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 
 // Yaml is YAML struct
 type Yaml struct {
-	data interface{}
+	data any
 }
 
 // ////////////////////////////////////////////////////////////////////////////////// //
@@ -26,8 +26,8 @@ type Yaml struct {
 // Errors
 var (
 	ErrYAMLIsNil                = errors.New("Yaml struct or data is nil")
-	ErrMapTypeAssertion         = errors.New("Type assertion to map[string]interface{} failed")
-	ErrArrayTypeAssertion       = errors.New("Type assertion to []interface{} failed")
+	ErrMapTypeAssertion         = errors.New("Type assertion to map[string]any failed")
+	ErrArrayTypeAssertion       = errors.New("Type assertion to []any failed")
 	ErrStringArrayTypeAssertion = errors.New("Type assertion to []string failed")
 	ErrBoolTypeAssertion        = errors.New("Type assertion to bool failed")
 	ErrStringTypeAssertion      = errors.New("Type assertion to string failed")
@@ -41,13 +41,13 @@ var (
 // New returns a pointer to a new, empty `Yaml` object
 func New() *Yaml {
 	return &Yaml{
-		data: make(map[string]interface{}),
+		data: make(map[string]any),
 	}
 }
 
 // NewYaml returns a pointer to a new `Yaml` object after unmarshalling `body` bytes
 func NewYaml(body []byte) (*Yaml, error) {
-	var data interface{}
+	var data any
 
 	err := yaml.Unmarshal(body, &data)
 
@@ -61,7 +61,7 @@ func NewYaml(body []byte) (*Yaml, error) {
 // ////////////////////////////////////////////////////////////////////////////////// //
 
 // Interface returns the underlying data
-func (y *Yaml) Interface() interface{} {
+func (y *Yaml) Interface() any {
 	if y == nil || y.data == nil {
 		return nil
 	}
@@ -168,12 +168,12 @@ func (y *Yaml) Bytes() ([]byte, error) {
 }
 
 // Map type asserts to an `map`
-func (y *Yaml) Map() (map[interface{}]interface{}, error) {
+func (y *Yaml) Map() (map[any]any, error) {
 	if y == nil || y.data == nil {
 		return nil, ErrYAMLIsNil
 	}
 
-	m, ok := (y.data).(map[interface{}]interface{})
+	m, ok := (y.data).(map[any]any)
 
 	if ok {
 		return m, nil
@@ -183,12 +183,12 @@ func (y *Yaml) Map() (map[interface{}]interface{}, error) {
 }
 
 // Array type asserts to an `array`
-func (y *Yaml) Array() ([]interface{}, error) {
+func (y *Yaml) Array() ([]any, error) {
 	if y == nil || y.data == nil {
 		return nil, ErrYAMLIsNil
 	}
 
-	a, ok := (y.data).([]interface{})
+	a, ok := (y.data).([]any)
 
 	if ok {
 		return a, nil
@@ -221,14 +221,14 @@ func (y *Yaml) StringArray() ([]string, error) {
 	return convertSlice(a)
 }
 
-// MustArray guarantees the return of a `[]interface{}` (with optional default)
+// MustArray guarantees the return of a `[]any` (with optional default)
 //
 // useful when you want to iterate over array values in a succinct manner:
-//		for i, v := range yaml.Get("results").MustArray() {
-//			fmt.Println(i, v)
 //
-func (y *Yaml) MustArray(args ...[]interface{}) []interface{} {
-	var def []interface{}
+//	for i, v := range yaml.Get("results").MustArray() {
+//		fmt.Println(i, v)
+func (y *Yaml) MustArray(args ...[]any) []any {
+	var def []any
 
 	if len(args) > 0 {
 		def = args[0]
@@ -243,14 +243,15 @@ func (y *Yaml) MustArray(args ...[]interface{}) []interface{} {
 	return a
 }
 
-// MustMap guarantees the return of a `map[string]interface{}` (with optional default)
+// MustMap guarantees the return of a `map[string]any` (with optional default)
 //
 // useful when you want to iterate over map values in a succinct manner:
-//		for k, v := range yaml.Get("dictionary").MustMap() {
-//			fmt.Println(k, v)
-//		}
-func (y *Yaml) MustMap(args ...map[interface{}]interface{}) map[interface{}]interface{} {
-	var def map[interface{}]interface{}
+//
+//	for k, v := range yaml.Get("dictionary").MustMap() {
+//		fmt.Println(k, v)
+//	}
+func (y *Yaml) MustMap(args ...map[any]any) map[any]any {
+	var def map[any]any
 
 	if len(args) > 0 {
 		def = args[0]
@@ -268,7 +269,8 @@ func (y *Yaml) MustMap(args ...map[interface{}]interface{}) map[interface{}]inte
 // MustString guarantees the return of a `string` (with optional default)
 //
 // useful when you explicitly want a `string` in a single value return context:
-//     myFunc(yaml.Get("param1").MustString(), yaml.Get("optional_param").MustString("my_default"))
+//
+//	myFunc(yaml.Get("param1").MustString(), yaml.Get("optional_param").MustString("my_default"))
 func (y *Yaml) MustString(args ...string) string {
 	var def string
 
@@ -288,9 +290,10 @@ func (y *Yaml) MustString(args ...string) string {
 // MustStringArray guarantees the return of a `[]string` (with optional default)
 //
 // useful when you want to iterate over array values in a succinct manner:
-//		for i, s := range yaml.Get("results").MustStringArray() {
-//			fmt.Println(i, s)
-//		}
+//
+//	for i, s := range yaml.Get("results").MustStringArray() {
+//		fmt.Println(i, s)
+//	}
 func (y *Yaml) MustStringArray(args ...[]string) []string {
 	var def []string
 
@@ -310,7 +313,8 @@ func (y *Yaml) MustStringArray(args ...[]string) []string {
 // MustInt guarantees the return of an `int` (with optional default)
 //
 // useful when you explicitly want an `int` in a single value return context:
-//     myFunc(yaml.Get("param1").MustInt(), yaml.Get("optional_param").MustInt(5150))
+//
+//	myFunc(yaml.Get("param1").MustInt(), yaml.Get("optional_param").MustInt(5150))
 func (y *Yaml) MustInt(args ...int) int {
 	var def int
 
@@ -330,7 +334,8 @@ func (y *Yaml) MustInt(args ...int) int {
 // MustFloat guarantees the return of a `float64` (with optional default)
 //
 // useful when you explicitly want a `float64` in a single value return context:
-//     myFunc(yaml.Get("param1").MustFloat64(), yaml.Get("optional_param").MustFloat64(5.150))
+//
+//	myFunc(yaml.Get("param1").MustFloat64(), yaml.Get("optional_param").MustFloat64(5.150))
 func (y *Yaml) MustFloat(args ...float64) float64 {
 	var def float64
 
@@ -350,7 +355,8 @@ func (y *Yaml) MustFloat(args ...float64) float64 {
 // MustBool guarantees the return of a `bool` (with optional default)
 //
 // useful when you explicitly want a `bool` in a single value return context:
-//     myFunc(yaml.Get("param1").MustBool(), yaml.Get("optional_param").MustBool(true))
+//
+//	myFunc(yaml.Get("param1").MustBool(), yaml.Get("optional_param").MustBool(true))
 func (y *Yaml) MustBool(args ...bool) bool {
 	var def bool
 
@@ -417,9 +423,10 @@ func (y *Yaml) GetByIndex(index int) *Yaml {
 // a `bool` identifying success or failure
 //
 // useful for chained operations when success is important:
-//    if data, ok := yaml.Get("top_level").CheckGet("inner"); ok {
-//        log.Println(data)
-//    }
+//
+//	if data, ok := yaml.Get("top_level").CheckGet("inner"); ok {
+//	    log.Println(data)
+//	}
 func (y *Yaml) CheckGet(key string) (*Yaml, bool) {
 	m, err := y.Map()
 
@@ -489,8 +496,8 @@ func (y *Yaml) GetMapKeys() ([]string, error) {
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 
-// convertSlice convert []interface{} slice to string slice
-func convertSlice(a []interface{}) ([]string, error) {
+// convertSlice convert []any slice to string slice
+func convertSlice(a []any) ([]string, error) {
 	result := make([]string, 0, len(a))
 
 	for _, item := range a {

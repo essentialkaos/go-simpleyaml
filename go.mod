@@ -1,10 +1,10 @@
 module github.com/essentialkaos/go-simpleyaml/v2
 
-go 1.22
+go 1.23.8
 
 require (
 	github.com/essentialkaos/check v1.4.1
-	gopkg.in/yaml.v2 v2.4.0
+	github.com/essentialkaos/yaml/v2 v2.4.1
 )
 
 require (
