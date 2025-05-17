@@ -11,7 +11,7 @@ import (
 	"errors"
 	"fmt"
 
-	"gopkg.in/yaml.v2"
+	"github.com/essentialkaos/yaml/v2"
 )
 
 // ////////////////////////////////////////////////////////////////////////////////// //
@@ -224,9 +224,9 @@ func (y *Yaml) StringArray() ([]string, error) {
 // MustArray guarantees the return of a `[]interface{}` (with optional default)
 //
 // useful when you want to iterate over array values in a succinct manner:
-//		for i, v := range yaml.Get("results").MustArray() {
-//			fmt.Println(i, v)
 //
+//	for i, v := range yaml.Get("results").MustArray() {
+//		fmt.Println(i, v)
 func (y *Yaml) MustArray(args ...[]interface{}) []interface{} {
 	var def []interface{}
 
@@ -246,9 +246,10 @@ func (y *Yaml) MustArray(args ...[]interface{}) []interface{} {
 // MustMap guarantees the return of a `map[string]interface{}` (with optional default)
 //
 // useful when you want to iterate over map values in a succinct manner:
-//		for k, v := range yaml.Get("dictionary").MustMap() {
-//			fmt.Println(k, v)
-//		}
+//
+//	for k, v := range yaml.Get("dictionary").MustMap() {
+//		fmt.Println(k, v)
+//	}
 func (y *Yaml) MustMap(args ...map[interface{}]interface{}) map[interface{}]interface{} {
 	var def map[interface{}]interface{}
 
@@ -268,7 +269,8 @@ func (y *Yaml) MustMap(args ...map[interface{}]interface{}) map[interface{}]inte
 // MustString guarantees the return of a `string` (with optional default)
 //
 // useful when you explicitly want a `string` in a single value return context:
-//     myFunc(yaml.Get("param1").MustString(), yaml.Get("optional_param").MustString("my_default"))
+//
+//	myFunc(yaml.Get("param1").MustString(), yaml.Get("optional_param").MustString("my_default"))
 func (y *Yaml) MustString(args ...string) string {
 	var def string
 
@@ -288,9 +290,10 @@ func (y *Yaml) MustString(args ...string) string {
 // MustStringArray guarantees the return of a `[]string` (with optional default)
 //
 // useful when you want to iterate over array values in a succinct manner:
-//		for i, s := range yaml.Get("results").MustStringArray() {
-//			fmt.Println(i, s)
-//		}
+//
+//	for i, s := range yaml.Get("results").MustStringArray() {
+//		fmt.Println(i, s)
+//	}
 func (y *Yaml) MustStringArray(args ...[]string) []string {
 	var def []string
 
@@ -310,7 +313,8 @@ func (y *Yaml) MustStringArray(args ...[]string) []string {
 // MustInt guarantees the return of an `int` (with optional default)
 //
 // useful when you explicitly want an `int` in a single value return context:
-//     myFunc(yaml.Get("param1").MustInt(), yaml.Get("optional_param").MustInt(5150))
+//
+//	myFunc(yaml.Get("param1").MustInt(), yaml.Get("optional_param").MustInt(5150))
 func (y *Yaml) MustInt(args ...int) int {
 	var def int
 
@@ -330,7 +334,8 @@ func (y *Yaml) MustInt(args ...int) int {
 // MustFloat guarantees the return of a `float64` (with optional default)
 //
 // useful when you explicitly want a `float64` in a single value return context:
-//     myFunc(yaml.Get("param1").MustFloat64(), yaml.Get("optional_param").MustFloat64(5.150))
+//
+//	myFunc(yaml.Get("param1").MustFloat64(), yaml.Get("optional_param").MustFloat64(5.150))
 func (y *Yaml) MustFloat(args ...float64) float64 {
 	var def float64
 
@@ -350,7 +355,8 @@ func (y *Yaml) MustFloat(args ...float64) float64 {
 // MustBool guarantees the return of a `bool` (with optional default)
 //
 // useful when you explicitly want a `bool` in a single value return context:
-//     myFunc(yaml.Get("param1").MustBool(), yaml.Get("optional_param").MustBool(true))
+//
+//	myFunc(yaml.Get("param1").MustBool(), yaml.Get("optional_param").MustBool(true))
 func (y *Yaml) MustBool(args ...bool) bool {
 	var def bool
 
@@ -417,9 +423,10 @@ func (y *Yaml) GetByIndex(index int) *Yaml {
 // a `bool` identifying success or failure
 //
 // useful for chained operations when success is important:
-//    if data, ok := yaml.Get("top_level").CheckGet("inner"); ok {
-//        log.Println(data)
-//    }
+//
+//	if data, ok := yaml.Get("top_level").CheckGet("inner"); ok {
+//	    log.Println(data)
+//	}
 func (y *Yaml) CheckGet(key string) (*Yaml, bool) {
 	m, err := y.Map()
 
