@@ -18,7 +18,7 @@ import (
 
 // Yaml is YAML struct
 type Yaml struct {
-	data interface{}
+	data any
 }
 
 // ////////////////////////////////////////////////////////////////////////////////// //
@@ -26,8 +26,8 @@ type Yaml struct {
 // Errors
 var (
 	ErrYAMLIsNil                = errors.New("Yaml struct or data is nil")
-	ErrMapTypeAssertion         = errors.New("Type assertion to map[string]interface{} failed")
-	ErrArrayTypeAssertion       = errors.New("Type assertion to []interface{} failed")
+	ErrMapTypeAssertion         = errors.New("Type assertion to map[string]any failed")
+	ErrArrayTypeAssertion       = errors.New("Type assertion to []any failed")
 	ErrStringArrayTypeAssertion = errors.New("Type assertion to []string failed")
 	ErrBoolTypeAssertion        = errors.New("Type assertion to bool failed")
 	ErrStringTypeAssertion      = errors.New("Type assertion to string failed")
@@ -41,13 +41,13 @@ var (
 // New returns a pointer to a new, empty `Yaml` object
 func New() *Yaml {
 	return &Yaml{
-		data: make(map[string]interface{}),
+		data: make(map[string]any),
 	}
 }
 
 // NewYaml returns a pointer to a new `Yaml` object after unmarshalling `body` bytes
 func NewYaml(body []byte) (*Yaml, error) {
-	var data interface{}
+	var data any
 
 	err := yaml.Unmarshal(body, &data)
 
@@ -61,7 +61,7 @@ func NewYaml(body []byte) (*Yaml, error) {
 // ////////////////////////////////////////////////////////////////////////////////// //
 
 // Interface returns the underlying data
-func (y *Yaml) Interface() interface{} {
+func (y *Yaml) Interface() any {
 	if y == nil || y.data == nil {
 		return nil
 	}
@@ -168,12 +168,12 @@ func (y *Yaml) Bytes() ([]byte, error) {
 }
 
 // Map type asserts to an `map`
-func (y *Yaml) Map() (map[interface{}]interface{}, error) {
+func (y *Yaml) Map() (map[any]any, error) {
 	if y == nil || y.data == nil {
 		return nil, ErrYAMLIsNil
 	}
 
-	m, ok := (y.data).(map[interface{}]interface{})
+	m, ok := (y.data).(map[any]any)
 
 	if ok {
 		return m, nil
@@ -183,12 +183,12 @@ func (y *Yaml) Map() (map[interface{}]interface{}, error) {
 }
 
 // Array type asserts to an `array`
-func (y *Yaml) Array() ([]interface{}, error) {
+func (y *Yaml) Array() ([]any, error) {
 	if y == nil || y.data == nil {
 		return nil, ErrYAMLIsNil
 	}
 
-	a, ok := (y.data).([]interface{})
+	a, ok := (y.data).([]any)
 
 	if ok {
 		return a, nil
@@ -221,14 +221,14 @@ func (y *Yaml) StringArray() ([]string, error) {
 	return convertSlice(a)
 }
 
-// MustArray guarantees the return of a `[]interface{}` (with optional default)
+// MustArray guarantees the return of a `[]any` (with optional default)
 //
 // useful when you want to iterate over array values in a succinct manner:
 //
 //	for i, v := range yaml.Get("results").MustArray() {
 //		fmt.Println(i, v)
-func (y *Yaml) MustArray(args ...[]interface{}) []interface{} {
-	var def []interface{}
+func (y *Yaml) MustArray(args ...[]any) []any {
+	var def []any
 
 	if len(args) > 0 {
 		def = args[0]
@@ -243,15 +243,15 @@ func (y *Yaml) MustArray(args ...[]interface{}) []interface{} {
 	return a
 }
 
-// MustMap guarantees the return of a `map[string]interface{}` (with optional default)
+// MustMap guarantees the return of a `map[string]any` (with optional default)
 //
 // useful when you want to iterate over map values in a succinct manner:
 //
 //	for k, v := range yaml.Get("dictionary").MustMap() {
 //		fmt.Println(k, v)
 //	}
-func (y *Yaml) MustMap(args ...map[interface{}]interface{}) map[interface{}]interface{} {
-	var def map[interface{}]interface{}
+func (y *Yaml) MustMap(args ...map[any]any) map[any]any {
+	var def map[any]any
 
 	if len(args) > 0 {
 		def = args[0]
@@ -496,8 +496,8 @@ func (y *Yaml) GetMapKeys() ([]string, error) {
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 
-// convertSlice convert []interface{} slice to string slice
-func convertSlice(a []interface{}) ([]string, error) {
+// convertSlice convert []any slice to string slice
+func convertSlice(a []any) ([]string, error) {
 	result := make([]string, 0, len(a))
 
 	for _, item := range a {
