@@ -3,7 +3,6 @@
 <p align="center">
   <a href="https://kaos.sh/g/go-simpleyaml"><img src=".github/images/godoc.svg"/></a>
   <a href="https://kaos.sh/w/go-simpleyaml/codeql"><img src="https://kaos.sh/w/go-simpleyaml/codeql.svg" alt="GitHub Actions CodeQL Status" /></a>
-  <a href="https://kaos.sh/r/go-simpleyaml"><img src="https://kaos.sh/r/go-simpleyaml.svg" alt="GoReportCard" /></a>
   <a href="https://kaos.sh/c/go-simpleyaml"><img src="https://kaos.sh/c/go-simpleyaml.svg" alt="Coverage Status" /></a>
   <a href="#license"><img src=".github/images/license.svg"/></a>
 </p>
